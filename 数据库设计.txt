@@ -1,0 +1,27 @@
+user表（简单点）注册登录
+
+name 用户名（主键）
+upassword  用户密码
+register_time 注册时间
+nickname  昵称
+userLevel 用户等级 管理员为1 普通用户为0  管理员可以自由增删改菜谱
+
+cookbook表 菜谱信息
+
+_ID 主键自增
+food_name 菜名 不能重复
+month 所属月份
+meterial 材料
+practice 做法
+effect 功效
+image 菜的图片
+
+star 收藏信息表
+
+_id 主键 自增
+userId 收藏人id 
+cookId 菜id
+
+
+
+

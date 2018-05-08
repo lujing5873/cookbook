@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <!--<include layout="@layout/public_title"  android:id="@+id/title"/>-->
+
+    <TextView
+        android:id="@+id/text_Logo"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/center"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:text="@string/app_logo"
+        android:textSize="24sp" />
+
+    <LinearLayout
+        android:id="@+id/center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:background="@color/register_login"
+        android:divider="@drawable/login_line"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:showDividers="middle|end">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingBottom="5dp">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@mipmap/user" />
+
+            <EditText
+                android:id="@+id/login_et_user"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:background="@null"
+                android:digits="@string/digits"
+                android:hint="@string/register_hint_user"
+                android:inputType="text" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingBottom="5dp"
+            android:paddingTop="16dp">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@mipmap/password" />
+
+            <EditText
+                android:id="@+id/login_et_pw"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_weight="1"
+                android:background="@null"
+                android:digits="@string/digits"
+                android:hint="@string/register_hint_password"
+                android:inputType="textPassword" />
+
+            <CheckBox
+                android:id="@+id/login_show_pw"
+                android:layout_width="25dp"
+                android:layout_height="20dp"
+                android:background="@drawable/password_state"
+                android:button="@null"
+                android:checked="true"
+                android:paddingLeft="5dp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/login_ok"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/center"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/shape_radius_white"
+        android:text="@string/login"
+        android:textColor="@color/white"
+        android:textSize="13sp" />
+
+    <TextView
+        android:id="@+id/login_register"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/login_ok"
+        android:layout_below="@id/login_ok"
+        android:paddingTop="10dp"
+        android:text="@string/go_register"
+        android:textColor="@color/register_line"
+        android:textSize="13dp" />
+</RelativeLayout>

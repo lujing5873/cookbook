@@ -1,0 +1,14 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/register_login</item>
+        <item name="colorPrimaryDark">@color/register_login</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+    <!-- name 是Style的名称，parent 继承那个父类样式 -->
+    <style name="theme_fullScreen" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowFullscreen">true</item>
+    </style>
+</resources>

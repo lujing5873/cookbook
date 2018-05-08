@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">婴儿菜谱</string>
+    <string name="app_logo">婴&#160;儿\n菜&#160;谱</string>
+    <string name="digits">abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789</string>
+    <string name="register_hint">设置用户名,昵称与密码</string>
+    <string name="register_hint_context">用户名和密码由8-16位数字、字母组成。</string>
+    <string name="register_hint_user">用户名</string>
+    <string name="register_hint_name">昵称</string>
+    <string name="register_hint_password">密码</string>
+    <string name="register">注册</string>
+    <string name="go_register">去注册</string>
+    <string name="login">登录</string>
+</resources>
