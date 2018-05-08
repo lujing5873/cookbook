@@ -9,6 +9,6 @@ public class MyApplication extends Application {
     public void onCreate() {
         super.onCreate();
         //第一：默认初始化
-        Bmob.initialize(this, Contents.BMOB_APP_KEY);
+        Bmob.initialize(this, Constants.BMOB_APP_KEY);
     }
 }

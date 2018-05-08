@@ -14,4 +14,10 @@
     <string name="bottom2">搜索</string>
     <string name="bottom3">收藏</string>
     <string name="bottom4">我的</string>
+    <string name="add_hint1">食物名称</string>
+    <string name="add_hint2">适龄月份</string>
+    <string name="add_hint3">材料</string>
+    <string name="add_hint4">做法</string>
+    <string name="add_hint5">功效</string>
+    <string name="add_ok">添加</string>
 </resources>

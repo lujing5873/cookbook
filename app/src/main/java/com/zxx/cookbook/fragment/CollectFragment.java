@@ -1,7 +1,9 @@
 package com.zxx.cookbook.fragment;
 
+import com.zxx.cookbook.bean.Food;
+
 /**
- * Created by MDM on 2018/5/8.
+ * 分类
  */
 
 public class CollectFragment extends BaseFragment {
@@ -12,7 +14,6 @@ public class CollectFragment extends BaseFragment {
 
     @Override
     public void initView() {
-
     }
 
     @Override

@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:showDividers="middle"
+    android:divider="@drawable/add_line">
+    <include layout="@layout/public_title"/>
+
+    <RelativeLayout
+        android:id="@+id/add_chooseImg"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="@color/white"
+        android:layout_margin="16dp">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textSize="24sp"
+            android:text="点击添加图片"
+            android:textColor="@color/black"
+            android:gravity="center"/>
+        <ImageView
+            android:id="@+id/add_img"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY"/>
+    </RelativeLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:padding="5dp"
+        android:background="@drawable/shape_radius_white"
+        android:hint="@string/add_hint1"
+        >
+    <EditText
+        android:id="@+id/add_et1"
+        android:background="@null"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+    </android.support.design.widget.TextInputLayout>
+
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_margin="16dp"
+        android:padding="5dp"
+        android:background="@drawable/shape_radius_white"
+        android:hint="@string/add_hint3"
+        >
+        <EditText
+            android:id="@+id/add_et3"
+            android:background="@null"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </android.support.design.widget.TextInputLayout>
+
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_margin="16dp"
+        android:padding="5dp"
+        android:background="@drawable/shape_radius_white"
+        android:hint="@string/add_hint4"
+        >
+        <EditText
+            android:id="@+id/add_et4"
+            android:background="@null"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_margin="16dp"
+        android:padding="5dp"
+        android:background="@drawable/shape_radius_white"
+        android:hint="@string/add_hint5"
+        >
+        <EditText
+            android:id="@+id/add_et5"
+            android:background="@null"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </android.support.design.widget.TextInputLayout>
+
+    <Button
+        android:id="@+id/add_ok"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/center"
+        android:layout_margin="16dp"
+        android:background="@drawable/shape_radius_black"
+        android:text="@string/add_ok"
+        android:textColor="@color/white"
+        android:textSize="13sp" />
+
+
+
+</LinearLayout>
+
+
+
+
+</ScrollView>

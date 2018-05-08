@@ -9,12 +9,21 @@ import android.widget.RadioButton;
 
 import com.zxx.cookbook.R;
 import com.zxx.cookbook.adapter.ViewPagerAdapter;
+import com.zxx.cookbook.bean.CookBook;
+import com.zxx.cookbook.bean.Food;
+import com.zxx.cookbook.fragment.ClassifyFragment;
+import com.zxx.cookbook.fragment.CollectFragment;
+import com.zxx.cookbook.fragment.MyFragment;
+import com.zxx.cookbook.fragment.SearchFragment;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import cn.bmob.v3.datatype.BmobPointer;
+import cn.bmob.v3.exception.BmobException;
+import cn.bmob.v3.listener.SaveListener;
 
 public class MainActivity extends BaseActivity {
 
@@ -58,10 +67,10 @@ public class MainActivity extends BaseActivity {
         tab4.setCompoundDrawables(null, drawableFirst4, null, null);//只放上面
 
         mList = new ArrayList<>();
-        Fragment fragment=new Fragment();
-        Fragment fragment2=new Fragment();
-        Fragment fragment3=new Fragment();
-        Fragment fragment4=new Fragment();
+        Fragment fragment=new ClassifyFragment();
+        Fragment fragment2=new SearchFragment();
+        Fragment fragment3=new CollectFragment();
+        Fragment fragment4=new MyFragment();
         mList.add(fragment);
         mList.add(fragment2);
         mList.add(fragment3);
@@ -88,6 +97,8 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public void initData() {
+
+
 
     }
 

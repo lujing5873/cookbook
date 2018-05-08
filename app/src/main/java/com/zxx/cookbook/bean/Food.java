@@ -2,6 +2,7 @@ package com.zxx.cookbook.bean;
 
 import cn.bmob.v3.BmobObject;
 import cn.bmob.v3.datatype.BmobFile;
+import cn.bmob.v3.datatype.BmobRelation;
 
 /**
  * 食物表
@@ -9,26 +10,16 @@ import cn.bmob.v3.datatype.BmobFile;
 
 public class Food extends BmobObject {
     private String foodName;
-    private Integer month;
-    private String material;
-    private String practice;
-    private String effect;
+    private String material;//材料
+    private String practice;//做法
+    private String effect;//功效
     private BmobFile image;
-
     public String getFoodName() {
         return foodName;
     }
 
     public void setFoodName(String foodName) {
         this.foodName = foodName;
-    }
-
-    public Integer getMonth() {
-        return month;
-    }
-
-    public void setMonth(Integer month) {
-        this.month = month;
     }
 
     public String getMaterial() {
@@ -62,4 +53,6 @@ public class Food extends BmobObject {
     public void setImage(BmobFile image) {
         this.image = image;
     }
+
+
 }

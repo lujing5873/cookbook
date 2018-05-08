@@ -1,6 +1,7 @@
 package com.zxx.cookbook.fragment;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -8,8 +9,6 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import com.zxx.cookbook.R;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -27,6 +26,7 @@ public abstract class BaseFragment extends Fragment {
         super.onAttach(activity);
         this.activity=activity;
     }
+
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
