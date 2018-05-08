@@ -18,13 +18,24 @@ import com.zxx.cookbook.bean.Food;
 
 import net.bither.util.NativeUtil;
 
+import java.io.File;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import cn.bmob.v3.datatype.BmobFile;
 import cn.bmob.v3.datatype.BmobRelation;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.SaveListener;
 import cn.bmob.v3.listener.UpdateListener;
+import cn.bmob.v3.listener.UploadFileListener;
+import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by dell on 2018/5/8.
@@ -44,6 +55,8 @@ public class AddFoodActivity extends BaseActivity {
     @BindView(R.id.add_et5)
     EditText addEt5;
     private final int REQUEST_CODE=10001;
+    private boolean isUploadSuccess;
+    private String imgTmpPath;
     @Override
     public int getLayoutId() {
         return R.layout.activity_add_food;
@@ -51,7 +64,7 @@ public class AddFoodActivity extends BaseActivity {
 
     @Override
     public void initView(Bundle savedInstanceState) {
-
+         imgTmpPath=getExternalFilesDir(Environment.DIRECTORY_PICTURES).getAbsolutePath()+"/tmp";
     }
 
     @Override
@@ -93,14 +106,54 @@ public class AddFoodActivity extends BaseActivity {
         }
     }
 
-    private void uploadImg(Uri res){
-        String[] filePathColumns = {MediaStore.Images.Media.DATA};
-        Cursor c = getContentResolver().query(res, filePathColumns, null, null, null);
-        c.moveToFirst();
-        int columnIndex = c.getColumnIndex(filePathColumns[0]);
-        String imagePath = c.getString(columnIndex);
-        c.close();
-        String imgPath=getExternalFilesDir(Environment.DIRECTORY_PICTURES).getAbsolutePath()+"/tmp";
-        NativeUtil.compressBitmap(NativeUtil.getBitmapFromFile(imagePath),imgPath);
+    private void uploadImg(final Uri res){
+        Observable<File> fileObservable=Observable.create(new ObservableOnSubscribe<File>() {
+            @Override
+            public void subscribe(ObservableEmitter<File> emitter) throws Exception {
+                String[] filePathColumns = {MediaStore.Images.Media.DATA};
+                Cursor c = getContentResolver().query(res, filePathColumns, null, null, null);
+                c.moveToFirst();
+                int columnIndex = c.getColumnIndex(filePathColumns[0]);
+                String imagePath = c.getString(columnIndex);
+                c.close();
+                NativeUtil.compressBitmap(NativeUtil.getBitmapFromFile(imagePath),imgTmpPath);
+                emitter.onNext(new File(imgTmpPath));
+            }
+        });
+        fileObservable
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+        fileObservable.subscribe(new Observer<File>() {
+            @Override
+            public void onSubscribe(Disposable d) {
+            }
+            @Override
+            public void onNext(File file) {
+                BmobFile bmobFile=new BmobFile(file);
+                bmobFile.upload(new UploadFileListener() {
+                    @Override
+                    public void done(BmobException e) {
+                        if(e==null){
+                            //bmobFile.getFileUrl()--返回的上传文件的完整地址
+                            showShortToast("上传文件成功" );
+                            isUploadSuccess=true;
+                        }else{
+                            showShortToast("上传文件失败");
+                            isUploadSuccess=false;
+                        }
+                    }
+                });
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                isUploadSuccess=false;
+                showShortToast("压缩文件失败");
+            }
+            @Override
+            public void onComplete() {
+            }
+        });
+
     }
 }
