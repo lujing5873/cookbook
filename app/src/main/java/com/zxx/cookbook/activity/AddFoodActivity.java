@@ -6,11 +6,13 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.zxx.cookbook.Constants;
 import com.zxx.cookbook.R;
 import com.zxx.cookbook.bean.CookBook;
@@ -57,6 +59,7 @@ public class AddFoodActivity extends BaseActivity {
     private final int REQUEST_CODE=10001;
     private boolean isUploadSuccess;
     private String imgTmpPath;
+    private BmobFile bmobFile;
     @Override
     public int getLayoutId() {
         return R.layout.activity_add_food;
@@ -84,11 +87,32 @@ public class AddFoodActivity extends BaseActivity {
                 String foodMaterial=addEt3.getText().toString();
                 String foodPractice=addEt4.getText().toString();
                 String foodEffect=addEt5.getText().toString();
+                if(!isUploadSuccess){
+                    showShortToast("请选择图片");
+                    return;
+                }
+                if(TextUtils.isEmpty(foodName)){
+                    showShortToast("请输入菜名");
+                    return;
+                }
+                if(TextUtils.isEmpty(foodMaterial)){
+                    showShortToast("请输入材料");
+                    return;
+                }
+                if(TextUtils.isEmpty(foodPractice)){
+                    showShortToast("请输入做法");
+                    return;
+                }
+                if(TextUtils.isEmpty(foodEffect)){
+                showShortToast("请输入功效");
+                return;
+                }
                 Food food=new Food();
                 food.setFoodName(foodName);
                 food.setPractice(foodPractice);
                 food.setMaterial(foodMaterial);
                 food.setEffect(foodEffect);
+                food.setImage(bmobFile);
 
                 break;
             case R.id.add_chooseImg:
@@ -129,7 +153,8 @@ public class AddFoodActivity extends BaseActivity {
             }
             @Override
             public void onNext(File file) {
-                BmobFile bmobFile=new BmobFile(file);
+                Glide.with(AddFoodActivity.this).load(file).into(addImg);
+                bmobFile=new BmobFile(file);
                 bmobFile.upload(new UploadFileListener() {
                     @Override
                     public void done(BmobException e) {
@@ -140,6 +165,7 @@ public class AddFoodActivity extends BaseActivity {
                         }else{
                             showShortToast("上传文件失败");
                             isUploadSuccess=false;
+                            bmobFile=null;
                         }
                     }
                 });
