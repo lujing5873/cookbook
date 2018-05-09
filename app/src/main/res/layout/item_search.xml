@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <ImageView
+
+        android:layout_marginLeft="5dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="5dp"
+        android:src="@mipmap/user"
+        android:layout_width="160dp"
+        android:layout_height="80dp"
+        android:id="@+id/item_search_iv" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/item_search_iv"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="11dp"
+        android:layout_toEndOf="@+id/item_search_iv"
+        android:text="10倍养生粥"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:id="@+id/item_search_title" />
+
+    <TextView
+        android:id="@+id/item_search_content"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_alignBottom="@+id/item_search_iv"
+        android:layout_alignParentEnd="true"
+        android:layout_alignStart="@+id/item_search_title"
+        android:layout_marginRight="10dp"
+        android:maxLines="2"
+        android:text="山东黄金犯得上犯得上发就收到回复的"
+        android:textSize="12sp" />
+    <View
+        android:layout_below="@+id/item_search_content"
+        android:layout_marginTop="10dp"
+        android:background="@color/black"
+        android:layout_width="match_parent"
+        android:layout_height="1dp">
+
+    </View>
+</RelativeLayout>
