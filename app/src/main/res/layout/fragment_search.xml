@@ -24,6 +24,15 @@
             android:src="@mipmap/bottom2"
             android:layout_width="20dp"
             android:layout_height="20dp" />
+        <TextView
+            android:padding="5dp"
+            android:textColor="@color/white"
+            android:layout_marginRight="40dp"
+            android:layout_gravity="center|right"
+            android:text="@string/bottom2"
+            android:background="@drawable/search_tv_drawable"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
     </FrameLayout>
     <android.support.v7.widget.RecyclerView
         android:id="@+id/search_recycler"
