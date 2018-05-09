@@ -21,7 +21,7 @@
         android:supportsRtl="true"
         android:name=".MyApplication"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.AddFoodActivity"
+        <activity android:name=".activity.AddCookbookActivity"
             android:theme="@style/theme_fullScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

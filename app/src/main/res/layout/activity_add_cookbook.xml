@@ -12,7 +12,7 @@
     <include layout="@layout/public_title"/>
 
     <RelativeLayout
-        android:id="@+id/add_chooseImg"
+        android:id="@+id/add_cookbook_chooseImg"
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:background="@color/white"
@@ -25,7 +25,7 @@
             android:textColor="@color/black"
             android:gravity="center"/>
         <ImageView
-            android:id="@+id/add_img"
+            android:id="@+id/add_cookbook_img"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="centerCrop"/>
@@ -37,62 +37,16 @@
         android:layout_margin="16dp"
         android:padding="5dp"
         android:background="@drawable/shape_radius_white"
-        android:hint="@string/add_hint1"
+        android:hint="@string/add_cookbook_hint"
         >
     <EditText
-        android:id="@+id/add_et1"
+        android:id="@+id/add_cookbook_et1"
         android:background="@null"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
     </android.support.design.widget.TextInputLayout>
 
 
-    <android.support.design.widget.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_margin="16dp"
-        android:padding="5dp"
-        android:background="@drawable/shape_radius_white"
-        android:hint="@string/add_hint3"
-        >
-        <EditText
-            android:id="@+id/add_et3"
-            android:background="@null"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-    </android.support.design.widget.TextInputLayout>
-
-
-    <android.support.design.widget.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_margin="16dp"
-        android:padding="5dp"
-        android:background="@drawable/shape_radius_white"
-        android:hint="@string/add_hint4"
-        >
-        <EditText
-            android:id="@+id/add_et4"
-            android:background="@null"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-    </android.support.design.widget.TextInputLayout>
-
-    <android.support.design.widget.TextInputLayout
-
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_margin="16dp"
-        android:padding="5dp"
-        android:background="@drawable/shape_radius_white"
-        android:hint="@string/add_hint5"
-        >
-        <EditText
-            android:id="@+id/add_et5"
-            android:background="@null"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-    </android.support.design.widget.TextInputLayout>
 
     <Button
         android:id="@+id/add_ok"

@@ -10,17 +10,24 @@ cookbook表 菜谱信息
 
 _ID 主键自增
 food_name 菜名 不能重复
-month 所属月份
 meterial 材料
 practice 做法
 effect 功效
 image 菜的图片
+
 
 star 收藏信息表
 
 _id 主键 自增
 userId 收藏人id 
 cookId 菜id
+
+cookbook表
+
+cookbookName 菜单名
+food 关联food
+
+
 
 
 

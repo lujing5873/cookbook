@@ -15,23 +15,18 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
-import com.zxx.cookbook.Constants;
 import com.zxx.cookbook.R;
 import com.zxx.cookbook.bean.CookBook;
-import com.zxx.cookbook.bean.Food;
 
 import net.bither.util.NativeUtil;
 
 import java.io.File;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.bmob.v3.datatype.BmobFile;
-import cn.bmob.v3.datatype.BmobRelation;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.SaveListener;
-import cn.bmob.v3.listener.UpdateListener;
 import cn.bmob.v3.listener.UploadFileListener;
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
@@ -42,35 +37,30 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
 /**
- * Created by dell on 2018/5/8.
+ * Created by dell on 2018/5/9.
  */
 
-public class AddFoodActivity extends BaseActivity {
+public class AddCookbookActivity extends BaseActivity {
+    private final int REQUEST_CODE = 10001;
     @BindView(R.id.title_text)
     TextView titleText;
-    @BindView(R.id.add_img)
-    ImageView addImg;
-    @BindView(R.id.add_et1)
-    EditText addEt1;
-    @BindView(R.id.add_et3)
-    EditText addEt3;
-    @BindView(R.id.add_et4)
-    EditText addEt4;
-    @BindView(R.id.add_et5)
-    EditText addEt5;
-    private final int REQUEST_CODE=10001;
+    @BindView(R.id.add_cookbook_img)
+    ImageView addCookbookImg;
+    @BindView(R.id.add_cookbook_et1)
+    EditText addCookbookEt1;
     private boolean isUploadSuccess;
     private String imgTmpPath;
     private BmobFile bmobFile;
+
     @Override
     public int getLayoutId() {
-        return R.layout.activity_add_food;
+        return R.layout.activity_add_cookbook;
     }
 
     @Override
     public void initView(Bundle savedInstanceState) {
-        titleText.setText("添加食物");
-         imgTmpPath=getExternalFilesDir(Environment.DIRECTORY_PICTURES).getAbsolutePath()+"/tmp";
+        titleText.setText("添加菜谱");
+        imgTmpPath = getExternalFilesDir(Environment.DIRECTORY_PICTURES).getAbsolutePath() + "/tmp";
     }
 
     @Override
@@ -79,60 +69,41 @@ public class AddFoodActivity extends BaseActivity {
     }
 
 
-    @OnClick({R.id.title_left, R.id.add_ok,R.id.add_chooseImg})
+    @OnClick({R.id.title_left, R.id.add_cookbook_chooseImg, R.id.add_ok})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.title_left:
                 finish();
                 break;
-            case R.id.add_ok:
-                String foodName = addEt1.getText().toString();
-                String foodMaterial=addEt3.getText().toString();
-                String foodPractice=addEt4.getText().toString();
-                String foodEffect=addEt5.getText().toString();
-                if(!isUploadSuccess){
-                    showShortToast("请选择图片");
-                    return;
-                }
-                if(TextUtils.isEmpty(foodName)){
-                    showShortToast("请输入菜名");
-                    return;
-                }
-                if(TextUtils.isEmpty(foodMaterial)){
-                    showShortToast("请输入材料");
-                    return;
-                }
-                if(TextUtils.isEmpty(foodPractice)){
-                    showShortToast("请输入做法");
-                    return;
-                }
-                if(TextUtils.isEmpty(foodEffect)){
-                showShortToast("请输入功效");
-                return;
-                }
-                Food food=new Food();
-                food.setFoodName(foodName);
-                food.setPractice(foodPractice);
-                food.setMaterial(foodMaterial);
-                food.setEffect(foodEffect);
-                food.setImage(bmobFile);
-                food.save(new SaveListener<String>() {
-                    @Override
-                    public void done(String s, BmobException e) {
-                        if(e==null){
-                            showShortToast("添加食物成功");
-                            finish();
-                        }else{
-                            showShortToast("添加食物失败");
-                        }
-                    }
-                });
-
-                break;
-            case R.id.add_chooseImg:
+            case R.id.add_cookbook_chooseImg:
                 Intent intent = new Intent(Intent.ACTION_PICK,
                         android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 startActivityForResult(intent, REQUEST_CODE);
+                break;
+            case R.id.add_ok:
+                String cookbookName=addCookbookEt1.getText().toString();
+                if(!isUploadSuccess){
+                    showShortToast("请先添加图片");
+                    return;
+                }
+                if(TextUtils.isEmpty(cookbookName)){
+                    showShortToast("请输入菜谱名称");
+                    return;
+                }
+                CookBook cookBook=new CookBook();
+                cookBook.setCookbookName(cookbookName);
+                cookBook.setCookbookImage(bmobFile);
+                cookBook.save(new SaveListener<String>() {
+                    @Override
+                    public void done(String s, BmobException e) {
+                        if(e==null){
+                            showShortToast("添加菜谱成功");
+                            finish();
+                        }else{
+                            showShortToast("添加菜谱失败");
+                        }
+                    }
+                });
                 break;
         }
     }
@@ -148,6 +119,7 @@ public class AddFoodActivity extends BaseActivity {
         Observable<File> fileObservable=Observable.create(new ObservableOnSubscribe<File>() {
             @Override
             public void subscribe(ObservableEmitter<File> emitter) throws Exception {
+
                 String[] filePathColumns = {MediaStore.Images.Media.DATA};
                 Cursor c = getContentResolver().query(res, filePathColumns, null, null, null);
                 c.moveToFirst();
@@ -160,14 +132,15 @@ public class AddFoodActivity extends BaseActivity {
         });
         fileObservable
                 .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread());
-        fileObservable.subscribe(new Observer<File>() {
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<File>() {
             @Override
             public void onSubscribe(Disposable d) {
+
             }
             @Override
             public void onNext(File file) {
-                Glide.with(AddFoodActivity.this).load(file).apply(new RequestOptions().skipMemoryCache(true).diskCacheStrategy( DiskCacheStrategy.NONE)).into(addImg);
+                Glide.with(AddCookbookActivity.this).load(file).apply(new RequestOptions().skipMemoryCache(true).diskCacheStrategy( DiskCacheStrategy.NONE)).into(addCookbookImg);
                 bmobFile=new BmobFile(file);
                 bmobFile.upload(new UploadFileListener() {
                     @Override
@@ -187,6 +160,7 @@ public class AddFoodActivity extends BaseActivity {
 
             @Override
             public void onError(Throwable e) {
+                System.out.println(e.getMessage());
                 bmobFile=null;
                 isUploadSuccess=false;
                 showShortToast("压缩文件失败");
