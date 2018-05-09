@@ -1,5 +1,6 @@
 package com.zxx.cookbook.fragment;
 
+import com.zxx.cookbook.R;
 import com.zxx.cookbook.bean.Food;
 
 /**
@@ -9,7 +10,7 @@ import com.zxx.cookbook.bean.Food;
 public class CollectFragment extends BaseFragment {
     @Override
     public int getLayoutId() {
-        return 0;
+        return R.layout.fragment_collect;
     }
 
     @Override

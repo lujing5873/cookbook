@@ -1,5 +1,7 @@
 package com.zxx.cookbook.fragment;
 
+import com.zxx.cookbook.R;
+
 /**
  * Created by MDM on 2018/5/8.
  */
@@ -7,7 +9,7 @@ package com.zxx.cookbook.fragment;
 public class MyFragment extends BaseFragment {
     @Override
     public int getLayoutId() {
-        return 0;
+        return R.layout.fragment_my;
     }
 
     @Override

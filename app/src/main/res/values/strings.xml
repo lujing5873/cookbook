@@ -22,4 +22,10 @@
     <string name="add_cookbook_hint">菜谱名称</string>
     <string name="add_ok">添加</string>
     <string name="add_choose_hint">点击添加图片</string>
+    <string name="desc">图片提醒</string>
+    <string name="search_hint">请输入菜名</string>
+    <string name="empty">没有数据</string>
+    <string name="food_effect">功效</string>
+    <string name="food_practice">做法</string>
+    <string name="food_material">材料</string>
 </resources>

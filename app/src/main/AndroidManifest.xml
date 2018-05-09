@@ -21,7 +21,7 @@
         android:supportsRtl="true"
         android:name=".MyApplication"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.AddCookbookActivity"
+        <activity android:name=".activity.CookbookListActivity"
             android:theme="@style/theme_fullScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -31,7 +31,8 @@
         </activity>
         <activity android:name=".activity.LoginActivity"/>
         <activity android:name=".activity.RegisterActivity"/>
-        <activity android:name=".activity.MainActivity"/>
+        <activity android:name=".activity.MainActivity" android:windowSoftInputMode="adjustPan"/>
+        <activity android:name=".activity.CookbookActivity"/>
     </application>
 
 </manifest>

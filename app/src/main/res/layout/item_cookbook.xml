@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp"
+    android:background="?android:attr/selectableItemBackground"
+    android:orientation="vertical">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="150dp">
+        <ImageView
+            android:id="@+id/cookbook_item_img"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/default_img"
+            android:contentDescription="@string/desc"/>
+
+        <TextView
+            android:id="@+id/cookbook_item_number"
+            android:paddingRight="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="@color/register_login"
+            android:gravity="end"
+            android:text="13"
+            android:textSize="13sp" />
+    </RelativeLayout>
+    <TextView
+        android:id="@+id/cookbook_item_name"
+        android:padding="5dp"
+        android:gravity="center"
+        android:text="4geyue"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+</LinearLayout>

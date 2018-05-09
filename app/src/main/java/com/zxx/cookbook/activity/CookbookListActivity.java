@@ -1,16 +1,15 @@
-package com.zxx.cookbook.fragment;
+package com.zxx.cookbook.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
+import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.zxx.cookbook.Constants;
 import com.zxx.cookbook.R;
-import com.zxx.cookbook.activity.CookbookActivity;
 import com.zxx.cookbook.adapter.CookbookAdapter;
 import com.zxx.cookbook.bean.CookBook;
 import com.zxx.cookbook.bean.Food;
@@ -20,8 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
+import butterknife.OnClick;
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.datatype.BmobPointer;
 import cn.bmob.v3.exception.BmobException;
@@ -34,39 +32,34 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
 /**
- * Created by MDM on 2018/5/8.
+ * Created by dell on 2018/5/9.
  */
 
-public class ClassifyFragment extends BaseFragment implements IRecyclerViewItemClick{
-
-    @BindView(R.id.classify_rv)
-    RecyclerView classifyRv;
-    private CookbookAdapter mAdapter;
+public class CookbookListActivity extends BaseActivity implements IRecyclerViewItemClick{
+    @BindView(R.id.title_text)
+    TextView titleText;
+    @BindView(R.id.cookbook_rv)
+    RecyclerView cookbookRv;
     private List<CookBook> mList;
+    private CookbookAdapter mAdapter;
     private int size;
     @Override
     public int getLayoutId() {
-        return R.layout.fragment_classify;
+        return R.layout.activity_cookbooks;
     }
 
     @Override
-    public void initView() {
+    public void initView(Bundle savedInstanceState) {
         mList=new ArrayList<>();
-        mAdapter=new CookbookAdapter(activity,mList,this);
-        classifyRv.setLayoutManager(new GridLayoutManager(activity,2));
-        classifyRv.setAdapter(mAdapter);
+        mAdapter=new CookbookAdapter(this,mList,this);
+        cookbookRv.setLayoutManager(new GridLayoutManager(this,2));
+        cookbookRv.setAdapter(mAdapter);
     }
 
     @Override
     public void initData() {
         queryData();
     }
-
-    @Override
-    public void initLisenter() {
-
-    }
-
     private void queryData(){
         io.reactivex.Observable.create(new ObservableOnSubscribe<List<CookBook>>() {
             @Override
@@ -125,9 +118,14 @@ public class ClassifyFragment extends BaseFragment implements IRecyclerViewItemC
 
     }
 
+    @OnClick(R.id.title_left)
+    public void onViewClicked() {
+    }
+
     @Override
     public void onItemClick(View view, int position) {
         CookBook cookBook=mList.get(position);
-        startActivity(new Intent(activity, CookbookActivity.class).putExtra(Constants.COOKBOOK,cookBook));
+        startActivity(new Intent(this, CookbookActivity.class).putExtra(Constants.COOKBOOK,cookBook));
     }
+
 }

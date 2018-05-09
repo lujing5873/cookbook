@@ -1,39 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:orientation="vertical"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
     <FrameLayout
-        android:background="@color/colorAccent"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+       >
+
         <EditText
-            android:paddingLeft="35dp"
-            android:hint="请输入菜名"
-            android:background="@drawable/search_drawable"
+            android:id="@+id/search_et1"
+            android:layout_width="match_parent"
+            android:layout_height="36dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_marginTop="10dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginBottom="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="36dp" />
+            android:background="@drawable/search_drawable"
+            android:hint="@string/search_hint"
+            android:paddingLeft="35dp" />
+
         <ImageView
-            android:layout_marginTop="18dp"
-            android:layout_marginLeft="30dp"
-            android:src="@mipmap/bottom2"
             android:layout_width="20dp"
-            android:layout_height="20dp" />
+            android:layout_height="20dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="18dp"
+            android:src="@mipmap/bottom2" />
+
         <TextView
-            android:padding="5dp"
-            android:textColor="@color/white"
-            android:layout_marginRight="40dp"
-            android:layout_gravity="center|right"
-            android:text="@string/bottom2"
-            android:background="@drawable/search_tv_drawable"
+            android:id="@+id/search_text"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|right"
+            android:layout_marginRight="40dp"
+            android:background="@drawable/search_tv_drawable"
+            android:padding="5dp"
+            android:text="@string/bottom2"
+            android:textColor="@color/white" />
     </FrameLayout>
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/search_recycler"
         android:layout_width="match_parent"

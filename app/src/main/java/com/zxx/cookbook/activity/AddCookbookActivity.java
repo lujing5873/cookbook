@@ -17,6 +17,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
 import com.zxx.cookbook.R;
 import com.zxx.cookbook.bean.CookBook;
+import com.zxx.cookbook.bean.Food;
 
 import net.bither.util.NativeUtil;
 
@@ -25,8 +26,10 @@ import java.io.File;
 import butterknife.BindView;
 import butterknife.OnClick;
 import cn.bmob.v3.datatype.BmobFile;
+import cn.bmob.v3.datatype.BmobRelation;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.SaveListener;
+import cn.bmob.v3.listener.UpdateListener;
 import cn.bmob.v3.listener.UploadFileListener;
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
