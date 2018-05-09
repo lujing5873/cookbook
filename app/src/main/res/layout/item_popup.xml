@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:divider="@drawable/add_line"
+    android:orientation="vertical"
+    android:showDividers="end">
     <TextView
+        android:padding="5dp"
         android:id="@+id/item_popup"
         android:textSize="16sp"
         android:textColor="@color/black"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
-</android.support.constraint.ConstraintLayout>
+</LinearLayout>

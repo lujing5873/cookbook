@@ -34,11 +34,6 @@ public class FoodAdapter extends ListBaseAdapter<Food>{
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        System.out.println("onCreateViewHolder");
-        if(viewType==EMPTY){
-            View view = mInfalter.inflate(R.layout.lay_empty, parent,false);
-            return new EmptyHolder(view);
-        }
         View view= mInfalter.inflate(R.layout.item_search, null);
         MyHolder holder=new MyHolder(view);
         return holder;
@@ -46,11 +41,6 @@ public class FoodAdapter extends ListBaseAdapter<Food>{
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        System.out.println("onBindViewHolder");
-        if(holder instanceof EmptyHolder){
-            System.out.println("空数据");
-            return;
-        }
         MyHolder myHolder= (MyHolder) holder;
         myHolder.itemView.setTag(position);
         myHolder.title.setText(mList.get(position).getFoodName());

@@ -5,12 +5,12 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.RadioButton;
+import android.widget.TextView;
 
 import com.zxx.cookbook.R;
 import com.zxx.cookbook.adapter.ViewPagerAdapter;
-import com.zxx.cookbook.bean.CookBook;
-import com.zxx.cookbook.bean.Food;
 import com.zxx.cookbook.fragment.ClassifyFragment;
 import com.zxx.cookbook.fragment.CollectFragment;
 import com.zxx.cookbook.fragment.MyFragment;
@@ -20,10 +20,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
-import cn.bmob.v3.datatype.BmobPointer;
-import cn.bmob.v3.exception.BmobException;
-import cn.bmob.v3.listener.SaveListener;
 
 public class MainActivity extends BaseActivity {
 
@@ -37,6 +35,10 @@ public class MainActivity extends BaseActivity {
     RadioButton tab4;
     @BindView(R.id.main_vp)
     ViewPager mainVp;
+    @BindView(R.id.title_left)
+    ImageView titleLeft;
+    @BindView(R.id.title_text)
+    TextView titleText;
     private List<Fragment> mList;
     private ViewPagerAdapter mViewPagerAdapter;
 
@@ -48,6 +50,8 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public void initView(Bundle savedInstanceState) {
+        titleText.setText(getResources().getString(R.string.app_name));
+        titleLeft.setVisibility(View.GONE);
         Drawable drawableFirst = getResources().getDrawable(R.drawable.bottom1_img);
         drawableFirst.setBounds(0, 0, 69, 69);//第一0是距左右边距离，第二0是距上下边距离，第三69长度,第四宽度
         tab1.setCompoundDrawables(null, drawableFirst, null, null);//只放上面
@@ -67,10 +71,10 @@ public class MainActivity extends BaseActivity {
         tab4.setCompoundDrawables(null, drawableFirst4, null, null);//只放上面
 
         mList = new ArrayList<>();
-        Fragment fragment=new ClassifyFragment();
-        Fragment fragment2=new SearchFragment();
-        Fragment fragment3=new CollectFragment();
-        Fragment fragment4=new MyFragment();
+        Fragment fragment = new ClassifyFragment();
+        Fragment fragment2 = new SearchFragment();
+        Fragment fragment3 = new CollectFragment();
+        Fragment fragment4 = new MyFragment();
         mList.add(fragment);
         mList.add(fragment2);
         mList.add(fragment3);
@@ -98,7 +102,6 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public void initData() {
-
 
 
     }
@@ -138,4 +141,5 @@ public class MainActivity extends BaseActivity {
                 break;
         }
     }
+
 }

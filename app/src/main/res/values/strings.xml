@@ -28,4 +28,5 @@
     <string name="food_effect">功效</string>
     <string name="food_practice">做法</string>
     <string name="food_material">材料</string>
+    <string name="delete">删除</string>
 </resources>

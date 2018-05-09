@@ -14,6 +14,7 @@ import com.zxx.cookbook.adapter.CookbookAdapter;
 import com.zxx.cookbook.bean.CookBook;
 import com.zxx.cookbook.bean.Food;
 import com.zxx.cookbook.interfaces.IRecyclerViewItemClick;
+import com.zxx.cookbook.widget.EmptyRecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,8 +39,10 @@ import io.reactivex.schedulers.Schedulers;
 public class CookbookListActivity extends BaseActivity implements IRecyclerViewItemClick{
     @BindView(R.id.title_text)
     TextView titleText;
-    @BindView(R.id.cookbook_rv)
-    RecyclerView cookbookRv;
+    @BindView(R.id.cookbooks_rv)
+    EmptyRecyclerView cookbookRv;
+    @BindView(R.id.id_empty_view)
+    View emptyView;
     private List<CookBook> mList;
     private CookbookAdapter mAdapter;
     private int size;
@@ -52,6 +55,7 @@ public class CookbookListActivity extends BaseActivity implements IRecyclerViewI
     public void initView(Bundle savedInstanceState) {
         mList=new ArrayList<>();
         mAdapter=new CookbookAdapter(this,mList,this);
+        cookbookRv.setEmptyView(emptyView);
         cookbookRv.setLayoutManager(new GridLayoutManager(this,2));
         cookbookRv.setAdapter(mAdapter);
     }

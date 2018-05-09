@@ -9,7 +9,7 @@
     <include layout="@layout/public_title" />
 
     <com.zxx.cookbook.widget.EmptyRecyclerView
-        android:id="@+id/cookbook_rv"
+        android:id="@+id/add_fdtock_recycler"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1" />
@@ -21,14 +21,13 @@
         android:layout_weight="1" />
 
     <Button
-        android:id="@+id/cookbook_ok"
+        android:id="@+id/add_fdtock_ok"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:background="@drawable/shape_radius_black"
-        android:text="@string/delete"
+        android:text="@string/add_ok"
         android:textColor="@color/white"
-        android:textSize="13sp"
-        android:visibility="gone" />
+        android:textSize="13sp" />
 
 </LinearLayout>

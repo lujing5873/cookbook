@@ -34,6 +34,7 @@ public class FoodManagerAdapter extends ListBaseAdapter<Food> {
 
     public void setManager(boolean manager) {
         isManager = manager;
+        notifyDataSetChanged();
     }
 
     public FoodManagerAdapter(Context context, List<Food> foods, IRecyclerViewItemClick listener) {
@@ -56,11 +57,7 @@ public class FoodManagerAdapter extends ListBaseAdapter<Food> {
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        System.out.println("onCreateViewHolder");
-        if (viewType == EMPTY) {
-            View view = mInfalter.inflate(R.layout.lay_empty, parent, false);
-            return new EmptyHolder(view);
-        } else if (viewType == IS_MANAGER) {
+        if (viewType == IS_MANAGER) {
             View view = mInfalter.inflate(R.layout.item_manager, null);
             return new ViewHolder(view);
         }
@@ -71,11 +68,6 @@ public class FoodManagerAdapter extends ListBaseAdapter<Food> {
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        System.out.println("onBindViewHolder");
-        if (holder instanceof EmptyHolder) {
-            System.out.println("空数据");
-            return;
-        }
         final Food food=mList.get(position);
         if(holder instanceof ViewHolder){
             ViewHolder viewHolder= (ViewHolder) holder;
@@ -138,6 +130,12 @@ public class FoodManagerAdapter extends ListBaseAdapter<Food> {
         ViewHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mListener.onItemClick(v,getAdapterPosition());
+                }
+            });
         }
     }
 }

@@ -59,9 +59,9 @@ public class AddFoodActivity extends BaseActivity {
     @BindView(R.id.add_et5)
     EditText addEt5;
     private final int REQUEST_CODE=10001;
-    private boolean isUploadSuccess;
     private String imgTmpPath;
     private BmobFile bmobFile;
+    private Food food;
     @Override
     public int getLayoutId() {
         return R.layout.activity_add_food;
@@ -71,6 +71,15 @@ public class AddFoodActivity extends BaseActivity {
     public void initView(Bundle savedInstanceState) {
         titleText.setText("添加食物");
          imgTmpPath=getExternalFilesDir(Environment.DIRECTORY_PICTURES).getAbsolutePath()+"/tmp";
+        food= (Food) getIntent().getSerializableExtra(Constants.FOOD);
+        if(food!=null){ //如果是修改food 设置服务器数据
+            bmobFile=food.getImage();
+            Glide.with(this).load(food.getImage().getUrl()).into(addImg);
+            addEt1.setText(food.getFoodName());
+            addEt3.setText(food.getMaterial());
+            addEt4.setText(food.getPractice());
+            addEt5.setText(food.getEffect());
+        }
     }
 
     @Override
@@ -90,7 +99,7 @@ public class AddFoodActivity extends BaseActivity {
                 String foodMaterial=addEt3.getText().toString();
                 String foodPractice=addEt4.getText().toString();
                 String foodEffect=addEt5.getText().toString();
-                if(!isUploadSuccess){
+                if(bmobFile==null){
                     showShortToast("请选择图片");
                     return;
                 }
@@ -110,23 +119,40 @@ public class AddFoodActivity extends BaseActivity {
                 showShortToast("请输入功效");
                 return;
                 }
-                Food food=new Food();
+                if(food==null){
+                    food=new Food();
+                }
                 food.setFoodName(foodName);
                 food.setPractice(foodPractice);
                 food.setMaterial(foodMaterial);
                 food.setEffect(foodEffect);
                 food.setImage(bmobFile);
-                food.save(new SaveListener<String>() {
-                    @Override
-                    public void done(String s, BmobException e) {
-                        if(e==null){
-                            showShortToast("添加食物成功");
-                            finish();
-                        }else{
-                            showShortToast("添加食物失败");
+                if(TextUtils.isEmpty(food.getObjectId())){
+                    food.save(new SaveListener<String>() {
+                        @Override
+                        public void done(String s, BmobException e) {
+                            if(e==null){
+                                showShortToast("添加食物成功");
+                                finish();
+                            }else{
+                                showShortToast("添加食物失败");
+                            }
                         }
-                    }
-                });
+                    });
+                }else{
+                    food.update(new UpdateListener() {
+                        @Override
+                        public void done( BmobException e) {
+                            if(e==null){
+                                showShortToast("修改食物成功");
+                                finish();
+                            }else{
+                                showShortToast("修改食物失败");
+                            }
+                        }
+                    });
+                }
+
 
                 break;
             case R.id.add_chooseImg:
@@ -175,10 +201,8 @@ public class AddFoodActivity extends BaseActivity {
                         if(e==null){
                             //bmobFile.getFileUrl()--返回的上传文件的完整地址
                             showShortToast("上传文件成功" );
-                            isUploadSuccess=true;
                         }else{
                             showShortToast("上传文件失败");
-                            isUploadSuccess=false;
                             bmobFile=null;
                         }
                     }
@@ -188,7 +212,6 @@ public class AddFoodActivity extends BaseActivity {
             @Override
             public void onError(Throwable e) {
                 bmobFile=null;
-                isUploadSuccess=false;
                 showShortToast("压缩文件失败");
             }
             @Override

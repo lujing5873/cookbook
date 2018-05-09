@@ -15,6 +15,7 @@ import com.zxx.cookbook.adapter.CookbookAdapter;
 import com.zxx.cookbook.bean.CookBook;
 import com.zxx.cookbook.bean.Food;
 import com.zxx.cookbook.interfaces.IRecyclerViewItemClick;
+import com.zxx.cookbook.widget.EmptyRecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,7 +41,9 @@ import io.reactivex.schedulers.Schedulers;
 public class ClassifyFragment extends BaseFragment implements IRecyclerViewItemClick{
 
     @BindView(R.id.classify_rv)
-    RecyclerView classifyRv;
+    EmptyRecyclerView classifyRv;
+    @BindView(R.id.id_empty_view)
+    View emptyView;
     private CookbookAdapter mAdapter;
     private List<CookBook> mList;
     private int size;
@@ -53,6 +56,7 @@ public class ClassifyFragment extends BaseFragment implements IRecyclerViewItemC
     public void initView() {
         mList=new ArrayList<>();
         mAdapter=new CookbookAdapter(activity,mList,this);
+        classifyRv.setEmptyView(emptyView);
         classifyRv.setLayoutManager(new GridLayoutManager(activity,2));
         classifyRv.setAdapter(mAdapter);
     }

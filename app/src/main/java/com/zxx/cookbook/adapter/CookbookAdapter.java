@@ -34,21 +34,12 @@ public class CookbookAdapter extends ListBaseAdapter<CookBook> {
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        if(viewType==EMPTY){
-            View view = mInfalter.inflate(R.layout.lay_empty, null);
-            return new EmptyHolder(view);
-        }
         View view = mInfalter.inflate(R.layout.item_cookbook, null);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position)  {
-
-        if(holder instanceof EmptyHolder){
-            System.out.println("空数据");
-            return;
-        }
         ViewHolder viewHolder= (ViewHolder) holder;
         CookBook cookBook=mList.get(position);
         viewHolder.cookbookItemName.setText(cookBook.getCookbookName());

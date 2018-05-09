@@ -40,10 +40,9 @@
             android:textColor="@color/white" />
     </FrameLayout>
 
-    <android.support.v7.widget.RecyclerView
+    <com.zxx.cookbook.widget.EmptyRecyclerView
         android:id="@+id/search_recycler"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-    </android.support.v7.widget.RecyclerView>
+        android:layout_height="match_parent"/>
+    <include layout="@layout/layout_empty_view"/>
 </LinearLayout>

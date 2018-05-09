@@ -24,8 +24,7 @@ public  abstract  class ListBaseAdapter<T> extends RecyclerView.Adapter {
     protected final int NORMAL=1002;
     @Override
     public int getItemCount() {
-        int size=mList.size();
-        return size==0?1:size;
+        return mList.size();
     }
 
     public List<T> getDataList() {
@@ -55,21 +54,9 @@ public  abstract  class ListBaseAdapter<T> extends RecyclerView.Adapter {
 
     }
 
-    @Override
-    public int getItemViewType(int position) {
-        if(mList.size()<=0){
-            return EMPTY;
-        }
-        return NORMAL;
-    }
 
     public void clear() {
         mList.clear();
         notifyDataSetChanged();
-    }
-   static class EmptyHolder extends RecyclerView.ViewHolder{
-        public EmptyHolder(View itemView) {
-            super(itemView);
-        }
     }
 }

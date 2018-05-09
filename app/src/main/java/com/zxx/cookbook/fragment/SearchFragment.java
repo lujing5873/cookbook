@@ -1,5 +1,6 @@
 package com.zxx.cookbook.fragment;
 
+import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
@@ -8,10 +9,13 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 
+import com.zxx.cookbook.Constants;
 import com.zxx.cookbook.R;
+import com.zxx.cookbook.activity.FoodActivity;
 import com.zxx.cookbook.adapter.FoodAdapter;
 import com.zxx.cookbook.bean.Food;
 import com.zxx.cookbook.interfaces.IRecyclerViewItemClick;
+import com.zxx.cookbook.widget.EmptyRecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,7 +43,9 @@ import io.reactivex.subjects.PublishSubject;
 
 public class SearchFragment extends BaseFragment implements IRecyclerViewItemClick {
     @BindView(R.id.search_recycler)
-    RecyclerView searchRecycler;
+    EmptyRecyclerView searchRecycler;
+    @BindView(R.id.id_empty_view)
+    View emptyView;
     @BindView(R.id.search_et1)
     EditText mSearch;
     private FoodAdapter adpater;
@@ -55,6 +61,7 @@ public class SearchFragment extends BaseFragment implements IRecyclerViewItemCli
     @Override
     public void initView() {
         searchRecycler.setLayoutManager(new LinearLayoutManager(activity));
+        searchRecycler.setEmptyView(emptyView);
         adpater = new FoodAdapter(activity, foods,this);
         searchRecycler.setAdapter(adpater);
     }
@@ -168,6 +175,6 @@ public class SearchFragment extends BaseFragment implements IRecyclerViewItemCli
 
     @Override
     public void onItemClick(View view, int position) {
-
+        startActivity(new Intent(activity,FoodActivity.class).putExtra(Constants.FOOD,foods.get(position)));
     }
 }

@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -19,6 +20,7 @@ import com.zxx.cookbook.bean.CookBook;
 import com.zxx.cookbook.bean.Food;
 import com.zxx.cookbook.bean.User;
 import com.zxx.cookbook.interfaces.IRecyclerViewItemClick;
+import com.zxx.cookbook.widget.EmptyRecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,12 +44,16 @@ public class CookbookActivity extends BaseActivity implements IRecyclerViewItemC
     @BindView(R.id.title_right)
     ImageView right;
     @BindView(R.id.cookbook_rv)
-    RecyclerView cookbookRv;
+    EmptyRecyclerView cookbookRv;
+    @BindView(R.id.cookbook_ok)
+    Button okButton;
+    @BindView(R.id.id_empty_view)
+    View emptyView;
     private int operateType;
     private CookBook cookBook;
     private List<Food> mList;
     private FoodManagerAdapter mAdapter;
-
+    private ListPopupWindow listPopupWindow;
     @Override
     public int getLayoutId() {
         return R.layout.activity_cookbook;
@@ -67,11 +73,13 @@ public class CookbookActivity extends BaseActivity implements IRecyclerViewItemC
                right.setImageResource(R.mipmap.more);
            }
         }
+        right.setVisibility(View.VISIBLE);
+        right.setImageResource(R.mipmap.more);
 
         titleText.setText(cookBook.getCookbookName());
         mList = new ArrayList<>();
         mAdapter = new FoodManagerAdapter(this, mList, this);
-        mAdapter.setManager(true);
+        cookbookRv.setEmptyView(emptyView);
         cookbookRv.setLayoutManager(new LinearLayoutManager(this));
         cookbookRv.setAdapter(mAdapter);
     }
@@ -99,7 +107,19 @@ public class CookbookActivity extends BaseActivity implements IRecyclerViewItemC
 
     @Override
     public void onItemClick(View view, int position) {
-
+        switch (operateType){
+            case Constants.DELETE:
+                mList.get(position).setCheck(!mList.get(position).isCheck());
+                mAdapter.notifyItemChanged(position);
+                break;
+            case Constants.EDIT:
+                startActivity(new Intent(this,AddFoodActivity.class).putExtra(Constants.FOOD,mList.get(position)));
+                operateType=0; //设为默认值
+                break;
+             default: //普通模式  跳转详情
+                 startActivity(new Intent(this,FoodActivity.class).putExtra(Constants.FOOD,mList.get(position)));
+              break;
+        }
     }
 
     @OnClick(R.id.title_left)
@@ -109,15 +129,20 @@ public class CookbookActivity extends BaseActivity implements IRecyclerViewItemC
 
     @OnClick(R.id.title_right)
     public void onRightClicked() {
+        if(mAdapter.isManager()){ //再次点击关闭管理模式
+            mAdapter.setManager(false);
+            okButton.setVisibility(View.GONE);
+            return;
+        }
         showListPopupWindow(right);
     }
 
     public void showListPopupWindow(View view) {
-        List<String > list=new ArrayList<>();
+        List<String> list=new ArrayList<>();
         list.add("删除");
         list.add("添加");
         list.add("修改");
-        ListPopupWindow listPopupWindow = new ListPopupWindow(this);
+        listPopupWindow = new ListPopupWindow(this);
 
         // ListView适配器
         listPopupWindow.setAdapter(
@@ -127,7 +152,23 @@ public class CookbookActivity extends BaseActivity implements IRecyclerViewItemC
         listPopupWindow.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int pos, long id) {
-                // listPopupWindow.dismiss();
+                switch (pos){ //更改至删除页面
+                    case 0:
+                        operateType=Constants.DELETE;
+                        break;
+                    case 1:
+                         //跳转添加页面
+                        listPopupWindow.dismiss();
+                        startActivity(new Intent(CookbookActivity.this,AddFdToCkActivity.class).putExtra(Constants.COOKBOOK,cookBook));
+                        return;
+                    case 2: //修改只改变点击item逻辑
+                        operateType=Constants.EDIT;
+                        listPopupWindow.dismiss();
+                        return;
+                }
+                okButton.setVisibility(View.VISIBLE);
+                mAdapter.setManager(true);
+                listPopupWindow.dismiss();
             }
         });
 
